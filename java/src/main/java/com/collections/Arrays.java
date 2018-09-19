@@ -6,6 +6,46 @@ public final class Arrays {
 
     private Arrays() {}
 
+    public static void mergeSort(int[] array) {
+        mergeSort(array, 0, array.length);
+    }
+
+    private static void mergeSort(int[] array, int start, int end) {
+        if (start < end - 1) {
+            int mid = (start + end) / 2;
+            mergeSort(array, start, mid);
+            mergeSort(array, mid, end);
+            join(array, start, mid, end);
+        }
+    }
+
+    private static void join(int[] array, int start, int mid, int end) {
+        int[] joined = new int[end - start];
+        int i = start;
+        int j = mid;
+        int nextJoinPos = 0;
+        while (i < mid || j < end) {
+            int nextElemToJoin;
+            if (i == mid) {
+                nextElemToJoin = array[j++];
+            } else if (j == end) {
+                nextElemToJoin = array[i++];
+            } else {
+                if (array[i] < array[j]) {
+                    nextElemToJoin = array[i++];
+                } else {
+                    nextElemToJoin = array[j++];
+                }
+            }
+            joined[nextJoinPos++] = nextElemToJoin;
+        }
+        for (int joinIdx = 0; joinIdx < joined.length; joinIdx++) {
+            array[start + joinIdx] = joined[joinIdx];
+        }
+    }
+
+
+
     public static void quicksort(int[] array) {
         quicksort(array, 0, array.length);
     }
