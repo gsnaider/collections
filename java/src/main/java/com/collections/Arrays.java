@@ -15,32 +15,32 @@ public final class Arrays {
             int mid = (start + end) / 2;
             mergeSort(array, start, mid);
             mergeSort(array, mid, end);
-            join(array, start, mid, end);
+            merge(array, start, mid, end);
         }
     }
 
-    private static void join(int[] array, int start, int mid, int end) {
-        int[] joined = new int[end - start];
+    private static void merge(int[] array, int start, int mid, int end) {
+        int[] merged = new int[end - start];
         int i = start;
         int j = mid;
-        int nextJoinPos = 0;
+        int nextMergePos = 0;
         while (i < mid || j < end) {
-            int nextElemToJoin;
+            int nextElemToMerge;
             if (i == mid) {
-                nextElemToJoin = array[j++];
+                nextElemToMerge = array[j++];
             } else if (j == end) {
-                nextElemToJoin = array[i++];
+                nextElemToMerge = array[i++];
             } else {
                 if (array[i] < array[j]) {
-                    nextElemToJoin = array[i++];
+                    nextElemToMerge = array[i++];
                 } else {
-                    nextElemToJoin = array[j++];
+                    nextElemToMerge = array[j++];
                 }
             }
-            joined[nextJoinPos++] = nextElemToJoin;
+            merged[nextMergePos++] = nextElemToMerge;
         }
-        for (int joinIdx = 0; joinIdx < joined.length; joinIdx++) {
-            array[start + joinIdx] = joined[joinIdx];
+        for (int mergeIdx = 0; mergeIdx < merged.length; mergeIdx++) {
+            array[start + mergeIdx] = merged[mergeIdx];
         }
     }
 
